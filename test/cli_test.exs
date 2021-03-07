@@ -1,9 +1,13 @@
 defmodule CLITest do
-  use ExUnit.Case 
+  use ExUnit.Case
 
   doctest Issues
 
-  import Issues.CLI, only: [parse_args: 1]
+  import Issues.CLI, only: [process: 1, parse_args: 1]
+
+  test "process returns a string if passed the user input tuple" do
+    assert process({ "clark", "issues-ex", 5 })  |> is_binary()
+  end
 
   test ":help returned by passing either -h or --help" do
     assert parse_args(["-h", "anything_at_all"]) == :help
@@ -11,10 +15,10 @@ defmodule CLITest do
   end
 
   test "3 values returned if 3 are given" do
-    assert parse_args(["user", "project", "99"]) == { "user", "project", 99 }
+    assert parse_args(["user", "project", "99"]) == {"user", "project", 99}
   end
 
   test "uses a default count if one is not given" do
-    assert parse_args(["user", "project"]) == { "user", "project", 4 }
+    assert parse_args(["user", "project"]) == {"user", "project", 4}
   end
 end
