@@ -11,7 +11,9 @@ defmodule Issues.CLI do
     "User: #{user}, Project: #{project}, issue count: #{count}"
   end
   def process(:help) do
-    IO.puts("usage...")
+    IO.puts """
+    usage:  issues <user> <project> [ count | #{@default_count} ]
+    """
     System.halt(0)
   end
 
