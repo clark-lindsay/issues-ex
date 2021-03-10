@@ -5,10 +5,6 @@ defmodule CLITest do
 
   import Issues.CLI, only: [process: 1, parse_args: 1]
 
-  test "process returns a string if passed the user input tuple" do
-    assert process({ "clark", "issues-ex", 5 })  |> is_binary()
-  end
-
   test ":help returned by passing either -h or --help" do
     assert parse_args(["-h", "anything_at_all"]) == :help
     assert parse_args(["--help", "anything_at_all"]) == :help

@@ -1,6 +1,8 @@
 defmodule Issues.CLI do
   @default_count 4
 
+  import Issues.GithubIssues, only: [ fetch: 2 ]
+
   def run(argv) do
     argv
     |> parse_args()
@@ -8,7 +10,8 @@ defmodule Issues.CLI do
   end
 
   def process({ user, project, count }) do
-    "User: #{user}, Project: #{project}, issue count: #{count}"
+    IO.puts "Looking for only #{count} issues..."
+    fetch(user, project)
   end
   def process(:help) do
     IO.puts """
