@@ -10,11 +10,11 @@ defmodule CLITest do
     assert parse_args(["--help", "anything_at_all"]) == :help
   end
 
-  test "3 values returned if 3 are given" do
+  test "parse returns 3 values if 3 are given" do
     assert parse_args(["user", "project", "99"]) == {"user", "project", 99}
   end
 
-  test "uses a default count if one is not given" do
+  test "parse uses a default count if one is not given" do
     assert parse_args(["user", "project"]) == {"user", "project", 4}
   end
 end

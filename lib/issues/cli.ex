@@ -7,6 +7,7 @@ defmodule Issues.CLI do
     argv
     |> parse_args()
     |> process()
+    |> decode_response()
   end
 
   def process({ user, project, count }) do
@@ -18,6 +19,12 @@ defmodule Issues.CLI do
     usage:  issues <user> <project> [ count | #{@default_count} ]
     """
     System.halt(0)
+  end
+
+  def decode_response({ :ok, body }), do: body
+  def decode_response({ :error, error_message }) do
+    IO.puts "Error from the github API: #{error_message}"
+    System.halt(2)
   end
 
   def parse_args(argv) do
