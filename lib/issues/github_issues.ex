@@ -1,22 +1,23 @@
 defmodule Issues.GithubIssues do
-  @user_agent [ { "User-agent", "Elixir clarklindsay96@gmail.com" } ]
+  @user_agent [{"User-agent", "Elixir clarklindsay96@gmail.com"}]
 
   def fetch(user, project) do
-    issues_url(user, project) 
-      |> HTTPoison.get(@user_agent)
-      |> handle_response
+    issues_url(user, project)
+    |> HTTPoison.get(@user_agent)
+    |> handle_response
   end
 
   def issues_url(user, project) do
     "https://api.github.com/repos/#{user}/#{project}/issues"
   end
 
-  def handle_response({ :ok, %HTTPoison.Response{ status_code: 200, body: body } }) do
-    { :ok, body }
+  def handle_response({:ok, %HTTPoison.Response{status_code: 200, body: body}}) do
+    {:ok, body}
   end
-  def handle_response({ _, %HTTPoison.Response{ status_code: status_code, body: body } }) do
+
+  def handle_response({_, %HTTPoison.Response{status_code: status_code, body: body}}) do
     {
-      status_code  |> check_for_error(), 
+      status_code |> check_for_error(),
       body |> Poison.Parser.parse!()
     }
   end
