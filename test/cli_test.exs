@@ -19,10 +19,14 @@ defmodule CLITest do
   end
 
   test "sort_by_date_ascending does exactly that" do
-    issue_one = %{ created_at: ~D[1996-04-23] }
-    issue_two = %{ created_at: ~D[1996-08-14] }
-    issue_three = %{ created_at: ~D[1996-08-14] }
+    issue_one = %{created_at: ~D[1996-04-23]}
+    issue_two = %{created_at: ~D[1996-08-14]}
+    issue_three = %{created_at: ~D[1996-08-14]}
 
-    assert sort_by_date_ascending([issue_one, issue_two, issue_three]) == [issue_two, issue_three, issue_one]
+    assert sort_by_date_ascending([issue_one, issue_two, issue_three]) == [
+             issue_two,
+             issue_three,
+             issue_one
+           ]
   end
 end
