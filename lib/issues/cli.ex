@@ -10,13 +10,14 @@ defmodule Issues.CLI do
     argv
     |> parse_args()
     |> process()
-    |> decode_response()
-    |> sort_by_date_ascending()
   end
 
-  def process({user, project, count}) do
+  def process({user, project, count}) when is_integer(count) and count > 0 do
     IO.puts("Fetching #{count} issues...")
     fetch(user, project)
+      |> decode_response()
+      |> sort_by_date_ascending()
+      |> Enum.slice(0..(count - 1))
   end
 
   def process(:help) do
