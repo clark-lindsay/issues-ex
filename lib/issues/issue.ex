@@ -12,6 +12,8 @@ defmodule Issues.Issue do
       }) do
     %{"login" => username} = user
 
+    {:ok, date, _utc_offset} = DateTime.from_iso8601(created_at)
+
     %Issues.Issue{
       id: id,
       url: url,
@@ -19,7 +21,7 @@ defmodule Issues.Issue do
       username: username,
       title: title,
       body: body,
-      created_at: Date.from_iso8601!(created_at)
+      created_at: date
     }
   end
 end

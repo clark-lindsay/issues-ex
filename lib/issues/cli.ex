@@ -39,7 +39,7 @@ defmodule Issues.CLI do
   end
 
   def sort_by_date_ascending(issues) do
-    issues |> Enum.sort(&(Date.compare(&1.created_at, &2.created_at) == :gt))
+    issues |> Enum.sort(&(DateTime.compare(&1.created_at, &2.created_at) == :gt))
   end
 
   def parse_args(argv) do

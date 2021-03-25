@@ -12,7 +12,7 @@ defmodule IssueTest do
              "user" => %{"login" => "test-user"},
              "title" => "test-title",
              "body" => "test-body",
-             "created_at" => "2015-01-23"
+             "created_at" => "2015-01-23T17:00:31Z"
            }) === %Issue{
              id: "test-id",
              url: "test-url",
@@ -20,7 +20,7 @@ defmodule IssueTest do
              username: "test-user",
              title: "test-title",
              body: "test-body",
-             created_at: ~D[2015-01-23]
+             created_at: ~U[2015-01-23 17:00:31Z]
            }
   end
 end
